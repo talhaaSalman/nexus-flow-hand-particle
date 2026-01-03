@@ -2,12 +2,21 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>">
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+    />
+    <link
+      rel="icon"
+      href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌌</text></svg>"
+    />
     <title>Hand-Sync Particle Nexus</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&display=swap"
+      rel="stylesheet"
+    />
 
     <style>
       :root {
@@ -22,43 +31,50 @@
       body {
         margin: 0;
         overflow: hidden;
-        background: radial-gradient(circle at 50% 50%, #0d1117 0%, #000000 100%);
+        background: radial-gradient(
+          circle at 50% 50%,
+          #0d1117 0%,
+          #000000 100%
+        );
         font-family: "Inter", sans-serif;
         color: white;
+        -webkit-tap-highlight-color: transparent;
+        -webkit-touch-callout: none;
       }
 
       #info {
         position: absolute;
-        top: 40px;
-        left: 40px;
+        top: 20px;
+        left: 20px;
         width: auto;
         text-align: left;
         pointer-events: none;
         z-index: 10;
+        max-width: 90%;
       }
 
-    
+
       #info h1 {
         font-weight: 700;
-        letter-spacing: -1px;
+        letter-spacing: -0.5px;
         margin: 0;
-        margin-bottom: 30px;
-        font-size: 2.5rem;
+        margin-bottom: 15px;
+        font-size: clamp(1.5rem, 6vw, 2.5rem);
         background: white;
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         text-shadow: 0 0 20px rgba(103, 108, 108, 0.4);
-        
+        line-height: 1.2;
       }
 
-  
+
       #info p {
-        font-size: 0.75rem;
-        margin-top: 15px;
-        letter-spacing: 1.5px;
-        line-height: 2.2;
+        font-size: clamp(0.55rem, 2.5vw, 0.75rem);
+        margin-top: 10px;
+        letter-spacing: 1px;
+        line-height: 1.8;
         text-transform: uppercase;
         font-weight: 500;
       }
@@ -66,47 +82,52 @@
       #info b {
         color: var(--accent);
         background: rgba(0, 242, 255, 0.1);
-        padding: 2px 8px;
+        padding: 2px 6px;
         border-radius: 4px;
         border: 1px solid rgba(0, 242, 255, 0.2);
-        margin: 0 4px;
+        margin: 0 3px;
+        font-size: 0.9em;
       }
 
-    
+      /* Shape display - responsive positioning */
       #shape-display {
         position: absolute;
-        top: 40px;
-        right: 40px;
+        top: 20px;
+        right: 20px;
         text-align: right;
         z-index: 10;
         pointer-events: none;
+        max-width: 40%;
       }
 
       #shape-label {
-        font-size: 0.7rem;
+        font-size: clamp(0.5rem, 2vw, 0.7rem);
         text-transform: uppercase;
-        letter-spacing: 3px;
+        letter-spacing: 2px;
         opacity: 0.5;
-        margin-bottom: 5px;
+        margin-bottom: 2px;
       }
 
       #current-shape-name {
-        font-size: 1.5rem;
+        font-size: clamp(1rem, 4vw, 1.5rem);
         font-weight: 500;
         text-transform: uppercase;
-        letter-spacing: 2px;
+        letter-spacing: 1px;
         color: var(--accent);
         text-shadow: 0 0 20px rgba(0, 242, 255, 0.4);
+        line-height: 1.2;
+        word-break: break-word;
       }
+
 
       #webcam-feed {
         display: block;
         position: absolute;
-        bottom: 20px;
-        right: 20px;
-        width: 240px;
+        bottom: 15px;
+        right: 15px;
+        width: clamp(120px, 30vw, 240px);
         height: auto;
-        border-radius: 10px;
+        border-radius: 8px;
         border: 2px solid rgba(255, 255, 255, 0.5);
         transform: scaleX(-1);
         z-index: 5;
@@ -114,26 +135,131 @@
         transition: all 0.3s ease;
       }
 
+
       #loading {
         position: absolute;
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
         color: var(--accent);
-        letter-spacing: 2px;
-        font-size: 0.8rem;
+        letter-spacing: 1px;
+        font-size: clamp(0.7rem, 3vw, 0.9rem);
         text-transform: uppercase;
+        text-align: center;
+        padding: 0 20px;
+        width: 80%;
+      }
+
+
+      @media (max-width: 768px) {
+        #info {
+          top: 15px;
+          left: 15px;
+        }
+
+        #shape-display {
+          top: 15px;
+          right: 15px;
+        }
+
+        #webcam-feed {
+          bottom: 10px;
+          right: 10px;
+          width: clamp(100px, 25vw, 180px);
+        }
+
+        #info p {
+          line-height: 1.6;
+        }
+      }
+
+      @media (max-width: 480px) {
+        #info {
+          top: 12px;
+          left: 12px;
+        }
+
+        #shape-display {
+          top: 12px;
+          right: 12px;
+        }
+
+        #webcam-feed {
+          bottom: 8px;
+          right: 8px;
+          width: clamp(90px, 22vw, 150px);
+          border-radius: 6px;
+        }
+
+        #info h1 {
+          margin-bottom: 10px;
+          letter-spacing: 0.5px;
+        }
+
+        #info p {
+          letter-spacing: 0.8px;
+        }
+      }
+
+  
+      @media (max-width: 320px) {
+        #info p {
+          font-size: 0.5rem;
+          line-height: 1.4;
+        }
+
+        #shape-label {
+          font-size: 0.45rem;
+        }
+
+        #current-shape-name {
+          font-size: 0.9rem;
+        }
+      }
+
+      
+      @media (max-height: 500px) and (orientation: landscape) {
+        #info {
+          top: 10px;
+          left: 10px;
+        }
+
+        #info h1 {
+          font-size: 1.2rem;
+          margin-bottom: 8px;
+        }
+
+        #info p {
+          font-size: 0.5rem;
+          line-height: 1.3;
+          margin-top: 5px;
+        }
+
+        #shape-display {
+          top: 10px;
+          right: 10px;
+        }
+
+        #webcam-feed {
+          bottom: 5px;
+          right: 5px;
+          width: 100px;
+        }
+
+        #loading {
+          font-size: 0.6rem;
+        }
       }
     </style>
   </head>
   <body>
     <div id="info">
       <h1>Nexus Flow</h1>
-        <p> 
-         👋 MOVE TO <span style="opacity:0.6">ROTATE & COLOR</span><br>
-         🤏 <b>PINCH</b> TO <span style="opacity:0.6">MORPH SHAPE</span><br>
-         ✊ <b>FIST</b> TO <span style="opacity:0.6">EXPAND RADIUS</span><br>
-         ☝️ <b>1 FINGER</b> TO <span style="opacity:0.6">FREEZE MESH</span>
+      <p>
+        👋 MOVE TO <span style="opacity: 0.6">ROTATE & COLOR</span><br />
+        🤏 <b>PINCH</b> TO <span style="opacity: 0.6">MORPH SHAPE</span><br />
+        ✊ <b>FIST</b> TO <span style="opacity: 0.6">EXPAND RADIUS</span><br />
+        ☝️ <b>1 FINGER</b> TO <span style="opacity: 0.6">FREEZE MESH</span>
       </p>
     </div>
 
@@ -147,36 +273,58 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js" crossorigin="anonymous"></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/camera_utils/camera_utils.js"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/@mediapipe/hands/hands.js"
+      crossorigin="anonymous"
+    ></script>
 
     <script>
-      const PARTICLE_COUNT = 20000; 
+    
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      const PARTICLE_COUNT = isMobile ? 10000 : 20000;
+
       let currentShape = "sphere";
       const shapeList = ["sphere", "heart", "saturn", "flower", "fireworks"];
       let shapeIndex = 0;
-      
+
       let targetPositions = [];
-      let handX = 0, handY = 0;
+      let handX = 0,
+        handY = 0;
       let isPinching = false;
       let isFist = false;
       let isFrozen = false;
-      
+
       let lastPinchTime = 0;
 
       // --- Scene Setup ---
       const scene = new THREE.Scene();
-      const camera = new THREE.PerspectiveCamera(60, window.innerWidth / window.innerHeight, 0.1, 1000);
+      const camera = new THREE.PerspectiveCamera(
+        60,
+        window.innerWidth / window.innerHeight,
+        0.1,
+        1000
+      );
       camera.position.z = 10;
 
-      const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      const renderer = new THREE.WebGLRenderer({
+        antialias: !isMobile, // Disable antialias on mobile for performance
+        alpha: true,
+        powerPreference: "high-performance",
+      });
+      renderer.setPixelRatio(
+        Math.min(window.devicePixelRatio, isMobile ? 1 : 2)
+      );
       renderer.setSize(window.innerWidth, window.innerHeight);
       document.body.appendChild(renderer.domElement);
 
       function createHardCircleTexture() {
         const canvas = document.createElement("canvas");
-        canvas.width = 64; canvas.height = 64;
+        canvas.width = 64;
+        canvas.height = 64;
         const ctx = canvas.getContext("2d");
         const gradient = ctx.createRadialGradient(32, 32, 0, 32, 32, 32);
         gradient.addColorStop(0, "rgba(255,255,255,1)");
@@ -197,11 +345,14 @@
         colors[i] = 1;
       }
 
-      geometry.setAttribute("position", new THREE.BufferAttribute(positions, 3));
+      geometry.setAttribute(
+        "position",
+        new THREE.BufferAttribute(positions, 3)
+      );
       geometry.setAttribute("color", new THREE.BufferAttribute(colors, 3));
 
       const material = new THREE.PointsMaterial({
-        size: 0.12, 
+        size: isMobile ? 0.15 : 0.12,
         vertexColors: true,
         transparent: true,
         opacity: 0.85,
@@ -218,36 +369,60 @@
         sphere: (i) => {
           const phi = Math.acos(-1 + (2 * i) / PARTICLE_COUNT);
           const theta = Math.sqrt(PARTICLE_COUNT * Math.PI) * phi;
-          return [4 * Math.cos(theta) * Math.sin(phi), 4 * Math.sin(theta) * Math.sin(phi), 4 * Math.cos(phi)];
+          return [
+            4 * Math.cos(theta) * Math.sin(phi),
+            4 * Math.sin(theta) * Math.sin(phi),
+            4 * Math.cos(phi),
+          ];
         },
         heart: (i) => {
           const phi = Math.random() * Math.PI * 2;
           const x = 16 * Math.pow(Math.sin(phi), 3);
-          const y = 13 * Math.cos(phi) - 5 * Math.cos(2 * phi) - 2 * Math.cos(3 * phi) - Math.cos(4 * phi);
+          const y =
+            13 * Math.cos(phi) -
+            5 * Math.cos(2 * phi) -
+            2 * Math.cos(3 * phi) -
+            Math.cos(4 * phi);
           return [x * 0.25, y * 0.25, (Math.random() - 0.5) * 2];
         },
         saturn: (i) => {
           if (i < PARTICLE_COUNT * 0.6) {
             const phi = Math.acos(-1 + (2 * i) / (PARTICLE_COUNT * 0.6));
             const theta = Math.sqrt(PARTICLE_COUNT * 0.6 * Math.PI) * phi;
-            return [2.5 * Math.cos(theta) * Math.sin(phi), 2.5 * Math.sin(theta) * Math.sin(phi), 2.5 * Math.cos(phi)];
+            return [
+              2.5 * Math.cos(theta) * Math.sin(phi),
+              2.5 * Math.sin(theta) * Math.sin(phi),
+              2.5 * Math.cos(phi),
+            ];
           } else {
             const angle = Math.random() * Math.PI * 2;
             const r = 4.5 + Math.random() * 2;
-            return [r * Math.cos(angle), (Math.random() - 0.5) * 0.3, r * Math.sin(angle)];
+            return [
+              r * Math.cos(angle),
+              (Math.random() - 0.5) * 0.3,
+              r * Math.sin(angle),
+            ];
           }
         },
         flower: (i) => {
           const u = Math.random() * Math.PI * 2;
           const v = Math.random() * Math.PI;
           const r = 3 + Math.sin(5 * u) * Math.sin(5 * v);
-          return [r * Math.sin(v) * Math.cos(u), r * Math.sin(v) * Math.sin(u), r * Math.cos(v)];
+          return [
+            r * Math.sin(v) * Math.cos(u),
+            r * Math.sin(v) * Math.sin(u),
+            r * Math.cos(v),
+          ];
         },
         fireworks: (i) => {
           const r = Math.pow(Math.random(), 1 / 3) * 7;
           const theta = Math.random() * Math.PI * 2;
           const phi = Math.acos(2 * Math.random() - 1);
-          return [r * Math.sin(phi) * Math.cos(theta), r * Math.sin(phi) * Math.sin(theta), r * Math.cos(phi)];
+          return [
+            r * Math.sin(phi) * Math.cos(theta),
+            r * Math.sin(phi) * Math.sin(theta),
+            r * Math.cos(phi),
+          ];
         },
       };
 
@@ -255,7 +430,9 @@
         const arr = new Float32Array(PARTICLE_COUNT * 3);
         for (let i = 0; i < PARTICLE_COUNT; i++) {
           const [x, y, z] = shapes[shapeName](i);
-          arr[i * 3] = x; arr[i * 3 + 1] = y; arr[i * 3 + 2] = z;
+          arr[i * 3] = x;
+          arr[i * 3 + 1] = y;
+          arr[i * 3 + 2] = z;
         }
         return arr;
       }
@@ -264,14 +441,13 @@
 
       function cycleShape() {
         const now = Date.now();
-        if (now - lastPinchTime < 4000) return; 
-        
+        if (now - lastPinchTime < 4000) return;
+
         shapeIndex = (shapeIndex + 1) % shapeList.length;
         currentShape = shapeList[shapeIndex];
-        
 
         document.getElementById("current-shape-name").innerText = currentShape;
-        
+
         targetPositions = getTargetPositions(currentShape);
         lastPinchTime = now;
       }
@@ -279,19 +455,23 @@
       // --- Hand Tracking ---
       const videoElement = document.getElementById("webcam-feed");
       const hands = new Hands({
-        locateFile: (file) => `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
+        locateFile: (file) =>
+          `https://cdn.jsdelivr.net/npm/@mediapipe/hands/${file}`,
       });
 
       hands.setOptions({
         maxNumHands: 1,
-        modelComplexity: 1,
+        modelComplexity: isMobile ? 0 : 1, // Lower complexity on mobile
         minDetectionConfidence: 0.6,
         minTrackingConfidence: 0.6,
       });
 
       hands.onResults((results) => {
         document.getElementById("loading").style.display = "none";
-        if (results.multiHandLandmarks && results.multiHandLandmarks.length > 0) {
+        if (
+          results.multiHandLandmarks &&
+          results.multiHandLandmarks.length > 0
+        ) {
           const lm = results.multiHandLandmarks[0];
 
           handX = (1 - lm[8].x) * 2 - 1;
@@ -305,7 +485,7 @@
           const isMiddleDown = lm[12].y > lm[10].y;
           const isRingDown = lm[16].y > lm[14].y;
           const isPinkyDown = lm[20].y > lm[18].y;
-          
+
           isFist = isIndexDown && isMiddleDown && isRingDown && isPinkyDown;
           isFrozen = !isIndexDown && isMiddleDown && isRingDown && isPinkyDown;
 
@@ -324,8 +504,11 @@
       });
 
       const cameraUtils = new Camera(videoElement, {
-        onFrame: async () => { await hands.send({ image: videoElement }); },
-        width: 720, height: 480,
+        onFrame: async () => {
+          await hands.send({ image: videoElement });
+        },
+        width: isMobile ? 480 : 720,
+        height: isMobile ? 320 : 480,
       });
       cameraUtils.start();
 
@@ -348,9 +531,12 @@
 
           for (let i = 0; i < PARTICLE_COUNT; i++) {
             const ix = i * 3;
-            posAttr.array[ix] += (targetPositions[ix] - posAttr.array[ix]) * 0.08;
-            posAttr.array[ix + 1] += (targetPositions[ix + 1] - posAttr.array[ix + 1]) * 0.08;
-            posAttr.array[ix + 2] += (targetPositions[ix + 2] - posAttr.array[ix + 2]) * 0.08;
+            posAttr.array[ix] +=
+              (targetPositions[ix] - posAttr.array[ix]) * 0.08;
+            posAttr.array[ix + 1] +=
+              (targetPositions[ix + 1] - posAttr.array[ix + 1]) * 0.08;
+            posAttr.array[ix + 2] +=
+              (targetPositions[ix + 2] - posAttr.array[ix + 2]) * 0.08;
 
             if (currentShape !== "fireworks") {
               posAttr.array[ix] += Math.sin(time * 0.5 + i) * 0.005;
@@ -379,6 +565,15 @@
         camera.updateProjectionMatrix();
         renderer.setSize(window.innerWidth, window.innerHeight);
       });
+
+   
+      document.addEventListener(
+        "touchmove",
+        function (e) {
+          if (e.scale !== 1) e.preventDefault();
+        },
+        { passive: false }
+      );
 
       animate();
     </script>
