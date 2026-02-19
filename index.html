@@ -118,9 +118,7 @@
         line-height: 1.2;
         word-break: break-word;
       }
-
-      /* New credit text - bottom left, matching shape-display theme */
-      #credit {
+ #credit {
         position: absolute;
         bottom: 20px;
         left: 20px;
@@ -144,6 +142,7 @@
         border-color: rgba(0, 242, 255, 0.3);
         background: rgba(0, 242, 255, 0.05);
       }
+
 
       #webcam-feed {
         display: block;
@@ -196,11 +195,6 @@
         #info p {
           line-height: 1.6;
         }
-
-        #credit {
-          bottom: 15px;
-          left: 15px;
-        }
       }
 
       @media (max-width: 480px) {
@@ -229,12 +223,6 @@
         #info p {
           letter-spacing: 0.8px;
         }
-
-        #credit {
-          bottom: 12px;
-          left: 12px;
-          padding: 3px 8px;
-        }
       }
 
   
@@ -250,10 +238,6 @@
 
         #current-shape-name {
           font-size: 0.9rem;
-        }
-
-        #credit {
-          font-size: 0.5rem;
         }
       }
 
@@ -289,12 +273,6 @@
         #loading {
           font-size: 0.6rem;
         }
-
-        #credit {
-          bottom: 10px;
-          left: 10px;
-          font-size: 0.5rem;
-        }
       }
     </style>
   </head>
@@ -313,10 +291,9 @@
       <div id="shape-label">Active Formation</div>
       <div id="current-shape-name">Sphere</div>
     </div>
-
-    <!-- Created by Talha Salman - added bottom left with matching theme -->
-    <div id="credit">Created by Talha Salman</div>
-
+    
+<div id="credit">Created by Talha Salman</div>
+    
     <div id="loading">Initializing Neural Mesh...</div>
     <video id="webcam-feed" autoplay playsinline></video>
 
